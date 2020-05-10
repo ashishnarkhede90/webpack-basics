@@ -1,10 +1,22 @@
 const path = require("path");
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: {
+        about: "./src/about.js",
+        contact: "./src/contact.js"
+    },
     output: {
-        filename: "main.js",
+        filename: "[name].bundle.js", // name comes from entry point object above
         path: path.resolve(__dirname, "dist")
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all'
+        }
+    },
+    devServer: {
+        contentBase: path.join(__dirname, "dist"),
+        port: 9000
     },
     module: {
         rules: [
