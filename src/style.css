@@ -2,3 +2,8 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
     color: brown;
 }
+
+#image {
+    background: url('ski-day.jpg');
+    background-repeat: no-repeat;
+}
