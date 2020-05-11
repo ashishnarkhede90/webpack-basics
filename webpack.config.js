@@ -1,8 +1,9 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
-    // entry: {
+    // entry: { // for multiple entry points
     //     about: "./src/about.js",
     //     contact: "./src/contact.js"
     // },
@@ -10,16 +11,20 @@ module.exports = {
     output: {
         //filename: "[name].bundle.js", // name comes from entry point object above
         filename: "main.js",
-        path: path.resolve(__dirname, "dist")
+        publicPath: '/dist/', // public url of the output directory if referenced in browser. This is useful if your index.html is not a part of webpack output and is an asset in public dir
+        path: path.resolve(__dirname, "dist/")
+    },
+    optimization: {
+        minimizer: [new UglifyJsPlugin()]
     },
     // optimization: {
     //     splitChunks: {
     //         chunks: 'all'
     //     }
     // },
-    plugins: [new HtmlWebpackPlugin()],
+    // plugins: [new HtmlWebpackPlugin()],
     devServer: {
-        contentBase: path.join(__dirname, "dist"),
+        contentBase: path.join(__dirname, "public/"),
         port: 9000
     },
     module: {
